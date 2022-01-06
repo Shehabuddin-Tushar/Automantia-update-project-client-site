@@ -76,12 +76,10 @@ function Addproduct() {
                        
                        {/* <TextField {...register("img", { required: true })} id="standard-basic"  sx={{display:"block"}}  label="Image url" variant="standard" />
                        <Typography sx={{color:"red"}}>{errors.img && <span>img url is required</span>}</Typography> */}
-                       <label htmlFor="contained-button-file">
-                            <Input accept="image/*" id="contained-button-file" multiple type="file" {...register("img", { required: true })} />
-                          <Button variant="contained" component="span">
-                              Upload
-                          </Button>
-                        </label>
+                       
+                            <input id="contained-button-file"  type="file" {...register("img", { required: true })} />
+                         
+                      
                           <Typography sx={{color:"red"}}>{errors.img && <span>img url is required</span>}</Typography>
                        <TextareaAutosize
                                 maxRows={4}
