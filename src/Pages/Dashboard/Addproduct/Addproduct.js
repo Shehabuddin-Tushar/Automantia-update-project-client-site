@@ -1,25 +1,47 @@
-import { Button, Grid, Input, TextField, Typography } from '@mui/material'
+import { Button, Grid, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import { styled } from '@mui/material/styles';
 import React from 'react'
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import TextareaAutosize from '@mui/core/TextareaAutosize';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+
+const Input = styled('input')({
+    display: 'none',
+});
+
 function Addproduct() {
     const { register, handleSubmit,formState: { errors },reset } = useForm();
-    const onSubmit = data =>{
-        
-        
-        const formData = new FormData();
 
-        formData.append('name',data.name);
-        formData.append('price',data.price);
-        formData.append('img',data.img[0]);
-        formData.append('description',data.description);
-
+ ///////////////////////////////
+    const onSubmit = async (data) => {
+        console.log(data)
+            let imageURL
+            const imageData = new FormData();
+            imageData.set("key", "06a916692ea087d185221539196ef3a5");
+            imageData.append("image", data.img[0]);
+            try {
+                const res = await axios.post(
+                    "https://api.imgbb.com/1/upload",
+                    imageData
+                );
+                imageURL = res.data.data.display_url;
+            } catch (error) {
+                
+                return alert("Failed to upload the image!");
+            }
         
-        axios.post(`https://desolate-atoll-64898.herokuapp.com/addproduct`,formData)
+
+        const productData = {
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            image: imageURL,
+        };
+
+        axios.post(`https://desolate-atoll-64898.herokuapp.com/addproduct`, productData)
         .then(res=>{
            console.log(res)
             if(res.data.insertedId){
@@ -31,10 +53,9 @@ function Addproduct() {
               
           })
           .catch(err=>console.log(err))
-          reset();
+           reset();
      }
-
-
+ /////////////////////     
 
     return (
         <Box>
@@ -55,14 +76,12 @@ function Addproduct() {
                        
                        {/* <TextField {...register("img", { required: true })} id="standard-basic"  sx={{display:"block"}}  label="Image url" variant="standard" />
                        <Typography sx={{color:"red"}}>{errors.img && <span>img url is required</span>}</Typography> */}
-
-                          <label htmlFor="contained-button-file">
-                                <Input accept="image/*" id="contained-button-file" type="file" {...register("img",{ required: true })}/>
-                                <br/><br/>
-                                <Button variant="contained" component="span">
-                                    Upload
-                                </Button>
-                          </label>
+                       <label htmlFor="contained-button-file">
+                            <Input accept="image/*" id="contained-button-file" multiple type="file" {...register("img", { required: true })} />
+                          <Button variant="contained" component="span">
+                              Upload
+                          </Button>
+                        </label>
                           <Typography sx={{color:"red"}}>{errors.img && <span>img url is required</span>}</Typography>
                        <TextareaAutosize
                                 maxRows={4}
