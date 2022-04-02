@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -46,34 +46,34 @@ import Manageproduct from './Manageproduct/Manageproduct';
 const drawerWidth = 240;
 
 function Dashboard(props) {
-        const { window } = props;
-        const [mobileOpen, setMobileOpen] = React.useState(false);
-        const {Logout,user}=useAuth();
-        const[myrole,setMyrole]=useState();
- 
-       const [databaseuser,setDatabaseuser]=useState({});
-       const useremail=user.email;
-        useEffect(()=>{
-          fetch(`https://desolate-atoll-64898.herokuapp.com/userfind/${user.email}`).then(res=>res.json()).then(data=>{
-            setDatabaseuser(data);
-            setMyrole(data.role==="admin"?true:false)
-          
-          })
-        },[useremail,myrole])
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { Logout, user } = useAuth();
+  const [myrole, setMyrole] = useState();
 
-       
-      
-        
-  const history=useHistory();
-  const gotologin=()=>{
-      history.push("/login")
+  const [databaseuser, setDatabaseuser] = useState({});
+  const useremail = user.email;
+  useEffect(() => {
+    fetch(`https://warm-depths-72297.herokuapp.com/userfind/${user.email}`).then(res => res.json()).then(data => {
+      setDatabaseuser(data);
+      setMyrole(data.role === "admin" ? true : false)
+
+    })
+  }, [useremail, myrole])
+
+
+
+
+  const history = useHistory();
+  const gotologin = () => {
+    history.push("/login")
   }
 
-  const logout=()=>{
+  const logout = () => {
     Logout();
     history.push("/login")
   }
-  
+
   let { path, url } = useRouteMatch();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -81,90 +81,90 @@ function Dashboard(props) {
 
   const drawer = (
     <div>
-       
-     
-      
-      <List sx={{bgcolor:"#ffc800",height:"100vh"}}>
-          <MenuItem>
-            <ListItemIcon>
-               <ShopIcon/>
-            </ListItemIcon>
-             <NavLink to="/products" activeStyle={{ color:'red' }} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>All products</NavLink>
-          </MenuItem>
-          <Divider />
 
 
-          <MenuItem>
-            <ListItemIcon>
-               <AdminPanelSettingsIcon/>
-            </ListItemIcon>
-             <NavLink to={`${url}`} activeStyle={{ color:'red' }} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>Dashboard</NavLink>
-          </MenuItem>
 
-        
-        
-          {myrole && <MenuItem>
-            <ListItemIcon>
-               <SupervisorAccountIcon/>
-            </ListItemIcon>
-             <NavLink to={`${url}/makeadmin`} activeStyle={{ color:'red' }} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>Make Admin</NavLink>
-          </MenuItem>}
+      <List sx={{ bgcolor: "#ffc800", height: "100vh" }}>
+        <MenuItem>
+          <ListItemIcon>
+            <ShopIcon />
+          </ListItemIcon>
+          <NavLink to="/products" activeStyle={{ color: 'red' }} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>All products</NavLink>
+        </MenuItem>
+        <Divider />
 
-          {myrole && <MenuItem>
-            <ListItemIcon>
-               <ManageAccountsIcon/>
-            </ListItemIcon>
-             <NavLink to={`${url}/manageorder`} activeStyle={{ color:'red' }} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>Manage All order</NavLink>
-          </MenuItem>}
 
-          {myrole && <MenuItem>
-            <ListItemIcon>
-               <AddIcon/>
-            </ListItemIcon>
-             <NavLink to={`${url}/addproduct`} activeStyle={{ color:'red' }} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>Add Product</NavLink>
-          </MenuItem>}
+        <MenuItem>
+          <ListItemIcon>
+            <AdminPanelSettingsIcon />
+          </ListItemIcon>
+          <NavLink to={`${url}`} activeStyle={{ color: 'red' }} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>Dashboard</NavLink>
+        </MenuItem>
 
-          {myrole && <MenuItem>
-            <ListItemIcon>
-               <ArticleIcon/>
-            </ListItemIcon>
-             <NavLink to={`${url}/manageproduct`} activeStyle={{ color:'red' }} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>Manage product</NavLink>
-          </MenuItem>}
 
-          <Divider />
 
-         
-          {/* {user.email && !myrole && <MenuItem>
+        {myrole && <MenuItem>
+          <ListItemIcon>
+            <SupervisorAccountIcon />
+          </ListItemIcon>
+          <NavLink to={`${url}/makeadmin`} activeStyle={{ color: 'red' }} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>Make Admin</NavLink>
+        </MenuItem>}
+
+        {myrole && <MenuItem>
+          <ListItemIcon>
+            <ManageAccountsIcon />
+          </ListItemIcon>
+          <NavLink to={`${url}/manageorder`} activeStyle={{ color: 'red' }} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>Manage All order</NavLink>
+        </MenuItem>}
+
+        {myrole && <MenuItem>
+          <ListItemIcon>
+            <AddIcon />
+          </ListItemIcon>
+          <NavLink to={`${url}/addproduct`} activeStyle={{ color: 'red' }} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>Add Product</NavLink>
+        </MenuItem>}
+
+        {myrole && <MenuItem>
+          <ListItemIcon>
+            <ArticleIcon />
+          </ListItemIcon>
+          <NavLink to={`${url}/manageproduct`} activeStyle={{ color: 'red' }} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>Manage product</NavLink>
+        </MenuItem>}
+
+        <Divider />
+
+
+        {/* {user.email && !myrole && <MenuItem>
             <ListItemIcon>
                <AccountBalanceIcon/>
             </ListItemIcon>
              <NavLink to={`${url}/pay`} activeStyle={{ color:'red' }} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>Payment</NavLink>
           </MenuItem>} */}
 
-          {user.email && !myrole && <MenuItem>
-            <ListItemIcon>
-               <StoreIcon/>
-            </ListItemIcon>
-             <NavLink to={`${url}/myorders`} activeStyle={{ color:'red' }} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>My orders</NavLink>
-          </MenuItem>}
+        {user.email && !myrole && <MenuItem>
+          <ListItemIcon>
+            <StoreIcon />
+          </ListItemIcon>
+          <NavLink to={`${url}/myorders`} activeStyle={{ color: 'red' }} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>My orders</NavLink>
+        </MenuItem>}
 
-          {user.email && !myrole && <MenuItem>
-            <ListItemIcon>
-               <AddIcon/>
-            </ListItemIcon>
-             <NavLink to={`${url}/addreview`} activeStyle={{ color:'red' }} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>Add Review</NavLink>
-          </MenuItem>}
+        {user.email && !myrole && <MenuItem>
+          <ListItemIcon>
+            <AddIcon />
+          </ListItemIcon>
+          <NavLink to={`${url}/addreview`} activeStyle={{ color: 'red' }} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>Add Review</NavLink>
+        </MenuItem>}
 
-          <MenuItem>
-            <ListItemIcon>
-            {user.email?<LoginIcon/>:<LogoutIcon/>}
-            </ListItemIcon>
+        <MenuItem>
+          <ListItemIcon>
+            {user.email ? <LoginIcon /> : <LogoutIcon />}
+          </ListItemIcon>
 
-            {user.email?<Button  onClick={logout} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>Logout</Button>:<Button  onClick={gotologin} style={{color:"#000",marginTop:"0px",padding:"10px 15px",textDecoration:"none"}}>LogIn</Button>}
-          </MenuItem>
-          
-       </List>
-      
+          {user.email ? <Button onClick={logout} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>Logout</Button> : <Button onClick={gotologin} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>LogIn</Button>}
+        </MenuItem>
+
+      </List>
+
     </div>
   );
 
@@ -172,13 +172,13 @@ function Dashboard(props) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      
+
       <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },bgcolor:"#ffc800",height:"72px"
+          ml: { sm: `${drawerWidth}px` }, bgcolor: "#ffc800", height: "72px"
         }}
       >
         <Toolbar>
@@ -233,39 +233,39 @@ function Dashboard(props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        
+
         <Switch>
-            <Route exact path={path}>
-                <Dashboardhome/>
-            </Route>
-            
-            <Route path={`${path}/makeadmin`}>
-               <DashboardAdmin/>
-            </Route>
-            <Route path={`${path}/addproduct`}>
-               <Addproduct/>
-            </Route>
-            <Route path={`${path}/payment/:id`}>
-               <Pay/>
-            </Route>
+          <Route exact path={path}>
+            <Dashboardhome />
+          </Route>
 
-            <Route path={`${path}/myorders`}>
-               <Myorders/>
-            </Route>
+          <Route path={`${path}/makeadmin`}>
+            <DashboardAdmin />
+          </Route>
+          <Route path={`${path}/addproduct`}>
+            <Addproduct />
+          </Route>
+          <Route path={`${path}/payment/:id`}>
+            <Pay />
+          </Route>
 
-            <Route path={`${path}/addreview`}>
-               <Addreview/>
-            </Route>
+          <Route path={`${path}/myorders`}>
+            <Myorders />
+          </Route>
 
-            <Route path={`${path}/manageorder`}>
-               <Manageallorders/>
-            </Route>
+          <Route path={`${path}/addreview`}>
+            <Addreview />
+          </Route>
 
-            <Route path={`${path}/manageproduct`}>
-               <Manageproduct/>
-            </Route>
+          <Route path={`${path}/manageorder`}>
+            <Manageallorders />
+          </Route>
 
-      </Switch>
+          <Route path={`${path}/manageproduct`}>
+            <Manageproduct />
+          </Route>
+
+        </Switch>
       </Box>
     </Box>
   );
