@@ -32,7 +32,7 @@ function Review() {
    
     useEffect(()=>{
 
-        fetch().then(res=>res.json()).then(data=>setAllreviews(data))
+        fetch("https://warm-depths-72297.herokuapp.com/reviews").then(res=>res.json()).then(data=>setAllreviews(data))
 
   },[])
 
