@@ -136,6 +136,12 @@ function Navbar() {
             <MenuItem>
                <NavLink to="/products" style={{textDecoration:"none",color:"#000",fontWeight:"bold",padding:"5px 15px"}}>Products</NavLink>
             </MenuItem>
+            <MenuItem>
+              <NavLink to="/about" style={{ textDecoration: "none", color: "#000", fontWeight: "bold", padding: "5px 15px" }}>About us</NavLink>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to="/contact" style={{ textDecoration: "none", color: "#000", fontWeight: "bold", padding: "5px 15px" }}>Contact us</NavLink>
+            </MenuItem>
             {user.email &&
              <MenuItem>
                <NavLink to="/dashboard" style={{textDecoration:"none",color:"#000",fontWeight:"bold",padding:"5px 15px"}}>Dashboard</NavLink>
@@ -189,7 +195,8 @@ function Navbar() {
              <Typography sx={{padding:"0px 0px",color:"#fff",fontSize:"20px"}}>{user.displayName && user.displayName}</Typography>
              <NavLink exact to="/" activeStyle={{ color:'yellow' }} style={{textDecoration:"none", fontSize:"20px",color:"#fff",fontWeight:"bold",padding:"0px 15px"}}>Home</NavLink>
              <NavLink to="/products" activeStyle={{ color:'yellow' }} style={{textDecoration:"none",fontSize:"20px",color:"#fff",fontWeight:"bold",padding:"0px 15px"}}>Products</NavLink>
-             
+                <NavLink to="/about" activeStyle={{ color: 'yellow' }} style={{ textDecoration: "none", fontSize: "20px", color: "#fff", fontWeight: "bold", padding: "0px 15px" }}>About us</NavLink>
+                <NavLink to="/contact" activeStyle={{ color: 'yellow' }} style={{ textDecoration: "none", fontSize: "20px", color: "#fff", fontWeight: "bold", padding: "0px 15px" }}>Contact us</NavLink>
              
              {user.email && <NavLink to="/dashboard" activeStyle={{ color:'red' }} style={{textDecoration:"none",color:"#fff",fontWeight:"bold",fontSize:"20px",padding:"0px 15px"}}>Dashboard</NavLink>}
              {
