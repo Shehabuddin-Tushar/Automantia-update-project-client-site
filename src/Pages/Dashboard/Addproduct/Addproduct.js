@@ -55,7 +55,8 @@ function Addproduct() {
           .catch(err=>console.log(err))
            reset();
      }
- /////////////////////     
+ ///////////////////// 
+ ///////////////////////   
 
     return (
         <Box>
