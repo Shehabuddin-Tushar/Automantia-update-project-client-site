@@ -44,7 +44,10 @@ function Login() {
           
         
       }).catch((error) => {
-          setError(error.message);
+        setError(error.message);
+        setTimeout(() => {
+          setError("")
+        }, 2000)
          
         }).finally(()=>setIsloading(false));
   }
@@ -67,7 +70,7 @@ function Login() {
                   <form onSubmit={handleemailpasswordlogin}>
                        
                        <Typography variant="h4" style={{textAlign:"center",marginBottom:"30px"}}>Login form</Typography>
-                       <Typography sx={{color:"red"}}>{error}</Typography>
+                  <Typography sx={{ color: "red" }}>{error === "Firebase: Error (auth/wrong-password)." ? "invalid authentication" : error}</Typography>
                        <TextField onChange={handleloginchange} name="email" type="email" id="standard-basic"  sx={{display:"block"}}  label="Email" variant="standard" />
                        <TextField onChange={handleloginchange} name="password" type="password" id="standard-basic"  sx={{display:"block"}}  label="Password" variant="standard" />
                        <Button type="submit" variant="contained" style={{marginTop:"30px",width:"100%",marginBottom:"20px"}}>Login</Button>
