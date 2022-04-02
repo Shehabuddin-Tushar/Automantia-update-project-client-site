@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Footer from '../../Shared/Footer/Footer'
 import Navbar from '../../Shared/Header/Navbar'
 import Blog from './Blog/Blog'
@@ -12,7 +13,10 @@ function Home() {
             <title>Home</title>
             <Navbar/>
             <Topbanner/>
-            <Products item={6}/>
+            <Products item={6} />
+            <div className="dark fire" style={{ textAlign: "center" }}>
+                <Link to="/products"><button class="bn632-hover bn20">Go to product page</button></Link>
+            </div>
             <Review/>
             <Blog/>
             <Footer/>

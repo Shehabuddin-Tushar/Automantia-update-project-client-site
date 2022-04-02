@@ -20,12 +20,16 @@ function Products({ item }) {
                 <Typography variant="h4" sx={{ textAlign: "center", marginBottom: "40px", color: "gray" }}>Select your favourite Product</Typography>
                 <Grid container spacing={2}>
                     {
-                        products.slice(0, item).map((product) => {
-                            return (
-                                <Singleproduct key={product.name} product={product} />
-                            )
-                        })
-                    }
+                        products.length == 0 ?
+                            <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                                <img src="https://i.postimg.cc/g0YNc69V/loader.gif" />
+                            </div>
+                            : products.slice(0, item).map((product) => {
+                                return (
+                                    <Singleproduct key={product.name} product={product} />
+                                )
+                            })
+                    } 
 
                 </Grid>
             </Container>
