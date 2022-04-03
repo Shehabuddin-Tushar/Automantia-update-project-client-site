@@ -35,6 +35,7 @@ function Contact() {
     })
   return (
       <div>
+          
           <title>contact us</title>
           <Navbar />
           <Box sx={{

@@ -13,6 +13,7 @@ import PrivateRoute from './PrivateRoute/Privateroute';
 import About from './Pages/About/About';
 import Contact from './Pages/Contact/Contact';
 import Success from './Pages/Success/Success';
+import Allblogs from './Pages/Allblogs/Allblogs'
 function App() {
     const {user}=useFirebase();
   return (
@@ -38,6 +39,11 @@ function App() {
             <Route path="/products">
                 <Ourproducts/>
             </Route>
+
+          <Route path="/blogs">
+                <Allblogs/>
+            </Route>
+           
 
             <PrivateRoute path="/singleproduct/:id">
                 <Singlepage/>

@@ -17,3 +17,12 @@
     
 
 }
+
+@media only screen and (max-width: 600px) {
+.loginform input[type="text"] {
+    width: 350px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+
+}

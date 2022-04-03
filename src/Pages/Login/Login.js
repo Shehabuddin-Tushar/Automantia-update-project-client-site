@@ -8,7 +8,7 @@ import Navbar from '../../Shared/Header/Navbar'
 import './Login.css'
 function Login() {
 
-  const {Logout,user,signupWithgoogleLogi,setUservalues,handleloginchange,singinLogin,error,setError,loginuser,setIsloading}=useAuth();
+  const { Logout, user,signupWithgoogleLogin,setUservalues,handleloginchange,singinLogin,error,setError,loginuser,setIsloading}=useAuth();
   let location=useLocation();
   const redirect_url=location.state?.from || "/products";
   console.log(redirect_url)
@@ -57,7 +57,16 @@ function Login() {
     history.push("/registration")
   }
      
-     
+  /**google login */
+  const handlegooglelogin = () => {
+    signupWithgoogleLogin().then((result) => {
+
+      history.push(redirect_url);
+      console.log(result.user)
+
+    }).finally(() => { setIsloading(false) })
+  }
+
     return (
         <>
         <title>Login</title>
@@ -74,7 +83,7 @@ function Login() {
                        <TextField onChange={handleloginchange} name="email" type="email" id="standard-basic"  sx={{display:"block"}}  label="Email" variant="standard" />
                        <TextField onChange={handleloginchange} name="password" type="password" id="standard-basic"  sx={{display:"block"}}  label="Password" variant="standard" />
                        <Button type="submit" variant="contained" style={{marginTop:"30px",width:"100%",marginBottom:"20px"}}>Login</Button>
-                       <Button  variant="contained" style={{width:"50%"}}><i class="fab fa-google" style={{marginRight:"10px"}}></i> login</Button> <Button onClick={gotoregisterpage} style={{width:"49%"}}  variant="contained">Register here</Button>
+                  <Button onClick={handlegooglelogin}  variant="contained" className="mygbtn"><i class="fab fa-google" style={{marginRight:"10px"}}></i> login</Button> <Button onClick={gotoregisterpage} className="mygbtn" variant="contained">Register here</Button>
                        
                     </form> 
                     

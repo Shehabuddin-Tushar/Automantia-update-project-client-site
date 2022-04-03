@@ -5,15 +5,22 @@ import automantiaAuthantication from '../Firebase/firebase.init';
 import {useHistory,Redirect} from 'react-router-dom'
 automantiaAuthantication();
 const auth = getAuth();
+const googleprovider = new GoogleAuthProvider();
 
-
-const useFirebase=()=>{
+const useFirebase = () => {
+ 
     const [user,setUser]=useState({});
     const [error,setError]=useState("");
     const [success,setSuccess]=useState("");
     const [isloading,setIsloading]=useState(true);
     const history=useHistory();
 
+   /** google login */
+   const signupWithgoogleLogin = () => {
+
+      return signInWithPopup(auth, googleprovider)
+   }
+   
 /*login start */
 
  const [loginuser,setLoginuser]=useState({
@@ -166,7 +173,7 @@ useEffect(()=>{
   
    return {
     isloading,setIsloading,loginuser,singinLogin,user,setUservalues,
-    Logout,handlechangeuservalues,createUser,error,setError,success,handleloginchange
+      Logout, handlechangeuservalues, createUser, error, setError, success, handleloginchange, signupWithgoogleLogin
 }
 }
 export default useFirebase;
