@@ -181,7 +181,7 @@ function Navbar() {
           >
             <NavLink to="/" style={{color:"#fff",textDecoration:"none"}}>AutoMantia</NavLink>
           </Typography>
-          <Search sx={{ display: { xs: 'none', sm: 'none',md:"block" } }}>
+          {/* <Search sx={{ display: { xs: 'none', sm: 'none',md:"block" } }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -189,20 +189,20 @@ function Navbar() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-             <Typography sx={{padding:"0px 0px",color:"#fff",fontSize:"20px"}}>{user.displayName && user.displayName}</Typography>
-             <NavLink exact to="/" activeStyle={{ color:'yellow' }} style={{textDecoration:"none", fontSize:"20px",color:"#fff",fontWeight:"bold",padding:"0px 15px"}}>Home</NavLink>
-             <NavLink to="/products" activeStyle={{ color:'yellow' }} style={{textDecoration:"none",fontSize:"20px",color:"#fff",fontWeight:"bold",padding:"0px 15px"}}>Products</NavLink>
-                <NavLink to="/about" activeStyle={{ color: 'yellow' }} style={{ textDecoration: "none", fontSize: "20px", color: "#fff", fontWeight: "bold", padding: "0px 15px" }}>About us</NavLink>
-                <NavLink to="/contact" activeStyle={{ color: 'yellow' }} style={{ textDecoration: "none", fontSize: "20px", color: "#fff", fontWeight: "bold", padding: "0px 15px" }}>Contact us</NavLink>
+             <Typography sx={{padding:"0px 0px",color:"#fff",fontSize:"18px"}}>{user.displayName && user.displayName}</Typography>
+             <NavLink exact to="/" activeStyle={{ color:'yellow' }} style={{textDecoration:"none", fontSize:"18px",color:"#fff",fontWeight:"bold",padding:"0px 15px"}}>Home</NavLink>
+             <NavLink to="/products" activeStyle={{ color:'yellow' }} style={{textDecoration:"none",fontSize:"18px",color:"#fff",fontWeight:"bold",padding:"0px 15px"}}>Products</NavLink>
+                <NavLink to="/about" activeStyle={{ color: 'yellow' }} style={{ textDecoration: "none", fontSize: "18px", color: "#fff", fontWeight: "bold", padding: "0px 15px" }}>About us</NavLink>
+                <NavLink to="/contact" activeStyle={{ color: 'yellow' }} style={{ textDecoration: "none", fontSize: "18px", color: "#fff", fontWeight: "bold", padding: "0px 15px" }}>Contact us</NavLink>
              
-             {user.email && <NavLink to="/dashboard" activeStyle={{ color:'red' }} style={{textDecoration:"none",color:"#fff",fontWeight:"bold",fontSize:"20px",padding:"0px 15px"}}>Dashboard</NavLink>}
+             {user.email && <NavLink to="/dashboard" activeStyle={{ color:'red' }} style={{textDecoration:"none",color:"#fff",fontWeight:"bold",fontSize:"18px",padding:"0px 15px"}}>Dashboard</NavLink>}
              {
-               user.email?<Button onClick={Logout}  style={{textDecoration:"none",color:"#fff",fontWeight:"bold",fontSize:"18px",padding:"0px 15px"}}>Log out</Button>:
+               user.email?<Button onClick={Logout}  style={{textDecoration:"none",color:"#fff",fontWeight:"bold",fontSize:"16px",padding:"0px 15px"}}>Log out</Button>:
              
-               <NavLink to="/login" activeStyle={{ color:'red' }} style={{textDecoration:"none",color:"#fff",fontWeight:"bold",fontSize:"20px",padding:"0px 15px"}}>Login</NavLink>
+               <NavLink to="/login" activeStyle={{ color:'red' }} style={{textDecoration:"none",color:"#fff",fontWeight:"bold",fontSize:"18px",padding:"0px 15px"}}>Login</NavLink>
              } 
 
           </Box>

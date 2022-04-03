@@ -1,101 +1,67 @@
-import { Card, CardContent, CardMedia, Container, Grid, Typography } from '@mui/material'
+import { Button, Card, CardContent, CardMedia, Container, Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+import axios from 'axios';
+import React,{useState,useEffect} from 'react'
+import BlogModal from '../../Modal/BlogModal';
+import './Blog.css'
 
 function Blog() {
+
+    const [blogs, setBlogs] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
+    const [blog, setBlog] = useState({});
+    const handleOpen = () => setOpenModal(true);
+    const handleClose = () => setOpenModal(false);
+    useEffect(() => {
+        axios.get("https://warm-depths-72297.herokuapp.com/blogs").then(res=>setBlogs(res.data)).catch(err=>console.log(err))
+    }, [])
+    
+
+    const detailsblog = (id) => {
+        axios.get(`https://warm-depths-72297.herokuapp.com/blogbyid/${id}`).then(res => setBlog(res.data)).catch(err => console.log(err))
+        handleOpen()
+    }
     return (
         <Box className="blog-wrapper">
-            <Container sx={{marginBottom:"50px"}}>
+            <Container sx={{marginBottom:"20px"}}>
                 <Typography variant="h4" sx={{textAlign:"center",mb:3}}>What's Hot Now&reg; Blog</Typography>
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                    <Card sx={{ display: 'flex',boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column',padding:"20px"}}>
-                            <CardContent sx={{ flex: '1 0 auto' }}>
-                            <Typography component="div" variant="h5">
-                                Blog one
-                            </Typography>
-                            <Typography variant="subtitle1" color="text.secondary" component="div">
-                                Jhon thomas
-                            </Typography>
-                            </CardContent>
-                            <Typography>Yukon AT4 has a special type of versatility. Ultimately,boundless comfort and classy styling helped lead Yukon to the prize.</Typography>
-                        </Box>
-                        <CardMedia
-                            component="img"
-                            sx={{ width: "300px" }}
-                            image="https://i.postimg.cc/YCsg2pRR/blogimage1.jpg"
-                            alt="Live from space album cover"
-                        />
-                    </Card>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                <Card sx={{ display: 'flex',boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column',padding:"20px"}}>
-                            <CardContent sx={{ flex: '1 0 auto' }}>
-                            <Typography component="div" variant="h5">
-                                Our Garage
-                            </Typography>
-                            <Typography variant="subtitle1" color="text.secondary" component="div">
-                                Michel radison
-                            </Typography>
-                            </CardContent>
-                            <Typography>it’s clear that Yukon AT4 has Ultimately, its dynamic off-road features, boundless comfort and classy styling helped lead Yukon to the prize.</Typography>
-                        </Box>
-                        <CardMedia
-                            component="img"
-                            sx={{ width: "300px" }}
-                            image="https://i.postimg.cc/t48dN3DN/carbanner.jpg"
-                            alt="Live from space album cover"
-                        />
-                    </Card>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                <Card sx={{ display: 'flex',boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
-                       <CardMedia
-                            component="img"
-                            sx={{ width: "300px" }}
-                            image="https://i.postimg.cc/htjTqJLh/blogimage2.jpg"
-                            alt="Live from space album cover"
-                        />
-                        <Box sx={{ display: 'flex', flexDirection: 'column',padding:"20px"}}>
-                            <CardContent sx={{ flex: '1 0 auto' }}>
-                            <Typography component="div" variant="h5">
-                                Upcomming car
-                            </Typography>
-                            <Typography variant="subtitle1" color="text.secondary" component="div">
-                               Andrew flintof
-                            </Typography>
-                            </CardContent>
-                            <Typography>Ultimately, its dynamic off-road features, boundless comfort and classy styling helped lead Yukon to the prize.</Typography>
-                        </Box>
-                        
-                    </Card>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                <Card sx={{ display: 'flex',boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
-                       <CardMedia
-                            component="img"
-                            sx={{ width: "300px" }}
-                            image="https://i.postimg.cc/zXWHq4nC/car9.jpg"
-                            alt="Live from space album cover"
-                        />
-                        <Box sx={{ display: 'flex', flexDirection: 'column',padding:"20px"}}>
-                            <CardContent sx={{ flex: '1 0 auto' }}>
-                            <Typography component="div" variant="h5">
-                                Blog four
-                            </Typography>
-                            <Typography variant="subtitle1" color="text.secondary" component="div">
-                                Tom cruis
-                            </Typography>
-                            </CardContent>
-                            <Typography>These Bollinger vehicles look more like Soviet military equipment than six-figure luxury cars. </Typography>
-                        </Box>
-                        
-                    </Card>
-                </Grid>
+                <Grid container spacing={2}>
+                    
+                    {blogs.slice(0,2).map((el) => {
+                        return (
+                            <Grid item xs={12} md={6} key={el._id}>
+
+                                <figure class="movie">
+                                    <div class="movie__hero">
+                                        <img src={el.img} alt="Rambo" className="movie__img" />
+                                    </div>
+                                    <div class="movie__content">
+                                        <div class="movie__title">
+                                            <h1 class="heading__primary">{el.name}</h1>
+                                            <h1 style={{color:"gray",fontWeight:"200"}} class="heading__primary">{ el.subtitle}</h1>
+
+
+                                        </div>
+                                        <p class="movie__description">
+                                            {el.description.slice(0,100)}
+                                        </p>
+                                        <Button onClick={()=>detailsblog(el._id)} variant="outlined" style={{ marginTop: "5px" }}>Details</Button>
+                                    </div>
+                                    <div class="movie__price">New Blog</div>
+                                </figure>
+
+
+
+
+                            </Grid> 
+                        )
+                    })}
+                    
+                    
+               
                 </Grid>
             </Container>
+            <BlogModal openModal={openModal} handleClose={handleClose} blogdetails={blog} />
         </Box>
     )
 }

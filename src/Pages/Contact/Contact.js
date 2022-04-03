@@ -46,9 +46,9 @@ function Contact() {
               <div style={{
                  
                   width: "75%",
-                  paddingTop: "50px",
+                  paddingTop: "55px",
                   paddingLeft: "0px",
-                  height: "84%",
+                  height: "100%",
                   textAlign: "center",
                   margin: "0 auto"
               }}>

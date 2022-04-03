@@ -3,7 +3,7 @@ import { Box } from '@mui/system'
 import React from 'react'
 import Footer from '../../Shared/Footer/Footer'
 import Navbar from '../../Shared/Header/Navbar'
-
+import './About.css'
 
 function About() {
   return (
@@ -18,41 +18,42 @@ function About() {
                   height: "300px",
                   objectFit: "cover"
               }}>
-                  <div style={{
+                  <div className="aboutoverlay" style={{
                       backgroundColor: "rgba(207,216,220,0.5)",
                       width: "75%",
-                      paddingTop: "50px",
+                      paddingTop: "10px",
                       paddingLeft: "50px",
-                      height: "84%",
+                      height: "100%",
                       textAlign: "center",
                       margin: "0 auto"
                   }}>
 
-                      <Typography variant="h4" style={{
+                      <Typography variant="h4" sx={{
                           fontWeight: "bold",
                           width: "40%",
                           margin: "0 auto",
                           textAlign: "center",
                           color: "#Feca00",
                           textShadow: "1px 2px grey",
-                          fontSize: { sm: "25px" },
-                          width: { sm: "90%" },
+                          fontSize: { xs:"20px",sm: "20px",md:"35px" },
+                          width: { sm: "90%",xs:"90%" },
                           paddingTop:"30px"
                       }}>About Automantia</Typography>
                       <Typography sx={{
                           border: "3px solid #Feca00",
 
                           width: "10%",
-                          margin: "30px auto",
+                          margin: { xs: "2px auto", md: "25px auto" },
                       }}></Typography>
                       <Typography variant="body2" gutterBottom paragraph sx={{
                           fontWeight: "bold",
                           width: "40%",
-                          margin: "10px auto",
+                          margin: {xs:"0px",md:"10px auto"},
                           textAlign: "center",
                           color: "black",
                           fontSize: "15px",
-                          width: { sm: "90%" }
+                          
+                          width: { sm: "95%",xs:"100%",lg:"80%" }
                       }}>
                           Our mission is To empower the community by ensuring state of the art method which strengthens the belief in quality sevice.
                           To utilize the power of youth by serving and meeting the emerging needs both in local and global network

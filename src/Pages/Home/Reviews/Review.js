@@ -1,4 +1,4 @@
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Container, Grid, IconButton, Typography } from '@mui/material'
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Container, Grid, IconButton, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React,{useState,useEffect} from 'react'
 import StarIcon from '@mui/icons-material/Star';
@@ -6,6 +6,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import './Review.css'
+import ReviewModal from '../../Modal/Modal';
+import axios from 'axios';
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -28,7 +30,11 @@ function SamplePrevArrow(props) {
     );
 }
 function Review() {
-    const [allreviews,setAllreviews]=useState([]);
+    const [allreviews, setAllreviews] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
+    const [review, setReview] = useState({});
+    const handleOpen = () => setOpenModal(true);
+    const handleClose = () => setOpenModal(false);
    
     useEffect(()=>{
 
@@ -42,7 +48,7 @@ function Review() {
         speed: 1000,
         slidesToShow: 3,
         slidesToScroll: 1,
-        pauseOnHover: false,
+        pauseOnHover: true,
         autoplay: true,
         responsive: [
             {
@@ -74,6 +80,11 @@ function Review() {
       
 
     };
+
+    const reviewdetails = (id) => {
+        axios.get(`https://warm-depths-72297.herokuapp.com/reviewbyid/${id}`).then(res => setReview(res.data)).catch(err => console.log(err))
+        handleOpen()
+    }
     return (
         <>
             
@@ -86,7 +97,7 @@ function Review() {
                     <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3 }}>What's our customer say's</Typography>
                  
                     
-                    <Slider {...settings} style={{marginLeft:"20px"}}>
+                    <Slider {...settings} style={{marginLeft:"10px"}}>
                         
                                 
 
@@ -110,48 +121,15 @@ function Review() {
                                                                 })
                                                         }
                                                     </div>
-                                                    <p>{review.reviewtext.slice(0, 40)}</p>
                                                    
+                                                   <Button variant="outlined" onClick={()=>reviewdetails(review._id)}>Client review</Button>
                                                     
                                                 </div>
 
                                                
                                             </>
 
-                                            // <Grid item xs={12} sm={6} md={11} style={{height:"100px"}}>
-                                            //     <Card sx={{}}>
-                                            //         <CardHeader
-                                            //             avatar={
-                                            //                 <Avatar sx={{}} aria-label="recipe">
-                                            //                     {review.username.slice(0, 1)}
-                                            //                 </Avatar>
-                                            //             }
-                                            //             action={
-                                            //                 <IconButton aria-label="settings">
-
-                                            //                 </IconButton>
-                                            //             }
-                                            //             title={review.username}
-                                            //             subheader={review.reviewdate}
-                                            //         />
-
-                                            //         <CardContent>
-                                            //             {
-                                            //                 [...Array(review.rating).keys()]
-                                            //                     .map(() => {
-                                            //                         return <StarIcon sx={{ color: "goldenrod" }} />
-                                            //                     })
-                                            //             }
-
-                                            //             <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                                            //                 {review.reviewtext.slice(0, 100)}.
-                                            //             </Typography>
-
-                                            //         </CardContent>
-
-                                            //     </Card>
-                                            // </Grid>
-
+                                            
 
                                         )
                                     })
@@ -164,6 +142,7 @@ function Review() {
 
                 </Container>
             </Box>
+            <ReviewModal openModal={openModal} handleClose={handleClose} clientreview={review} />
         </>
         
     )

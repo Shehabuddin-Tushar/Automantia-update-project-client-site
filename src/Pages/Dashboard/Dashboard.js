@@ -43,6 +43,7 @@ import Myorders from './Myorders/Myorders';
 import Addreview from './Addreview/Addreview';
 import Manageallorders from './ManageAllorders/Manageallorders';
 import Manageproduct from './Manageproduct/Manageproduct';
+import Addblog from './Addblog/Addblog';
 const drawerWidth = 240;
 
 function Dashboard(props) {
@@ -133,6 +134,15 @@ function Dashboard(props) {
 
         <Divider />
 
+
+        {myrole && <MenuItem>
+          <ListItemIcon>
+            <SupervisorAccountIcon />
+          </ListItemIcon>
+          <NavLink to={`${url}/addblog`} activeStyle={{ color: 'red' }} style={{ color: "#000", marginTop: "0px", padding: "10px 15px", textDecoration: "none" }}>Add blog</NavLink>
+        </MenuItem>}
+
+        <Divider />
 
         {/* {user.email && !myrole && <MenuItem>
             <ListItemIcon>
@@ -263,6 +273,10 @@ function Dashboard(props) {
 
           <Route path={`${path}/manageproduct`}>
             <Manageproduct />
+          </Route>
+
+          <Route path={`${path}/addblog`}>
+            <Addblog />
           </Route>
 
         </Switch>
