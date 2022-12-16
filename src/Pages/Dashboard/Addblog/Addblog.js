@@ -41,7 +41,7 @@ function Addblog() {
             image: imageURL,
         };
 
-        axios.post(`https://warm-depths-72297.herokuapp.com/addblog`, blogData)
+        axios.post(`https://automantia-update-server-site.vercel.app/addblog`, blogData)
             .then(res => {
                 console.log(res)
                 if (res.data.insertedId) {

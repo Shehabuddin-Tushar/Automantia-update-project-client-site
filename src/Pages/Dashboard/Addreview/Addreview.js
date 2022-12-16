@@ -18,7 +18,7 @@ function Addreview() {
     setReviewnumber(event.target.value);
   };
   const onSubmit = data => {
-    axios.post(`https://warm-depths-72297.herokuapp.com/savereview`, data)
+    axios.post(`https://automantia-update-server-site.vercel.app/savereview`, data)
       .then(res => {
         toast.success("your review add successfully")
 

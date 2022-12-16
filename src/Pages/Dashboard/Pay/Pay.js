@@ -18,7 +18,7 @@ function Pay() {
 
   useEffect(() => {
 
-    fetch(`https://warm-depths-72297.herokuapp.com/myorderByid/${id}`).then(res => res.json()).then(data => {
+    fetch(`https://automantia-update-server-site.vercel.app/myorderByid/${id}`).then(res => res.json()).then(data => {
       setMydetail(data)
       setMyorder(data.productdetails);
 

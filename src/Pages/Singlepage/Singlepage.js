@@ -25,7 +25,7 @@ function Singlepage() {
     }
     data.productdetails = myorderproduct;
 
-    axios.post(`https://warm-depths-72297.herokuapp.com/ordersave`, data)
+    axios.post(`https://automantia-update-server-site.vercel.app/ordersave`, data)
       .then(res => {
         toast.success("your order successfully")
 
@@ -37,7 +37,7 @@ function Singlepage() {
   const { user } = useAuth();
 
   useEffect(() => {
-    axios.get(`https://warm-depths-72297.herokuapp.com/product/${id}`).then(res => setProduct(res.data)).catch(err => console.log(err));
+    axios.get(`https://automantia-update-server-site.vercel.app/product/${id}`).then(res => setProduct(res.data)).catch(err => console.log(err));
   }, [])
   return (
 

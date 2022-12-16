@@ -41,7 +41,7 @@ function Addproduct() {
             image: imageURL,
         };
 
-        axios.post(`https://warm-depths-72297.herokuapp.com/addproduct`, productData)
+        axios.post(`https://automantia-update-server-site.vercel.app/addproduct`, productData)
             .then(res => {
                 console.log(res)
                 if (res.data.insertedId) {

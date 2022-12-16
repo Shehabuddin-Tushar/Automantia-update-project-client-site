@@ -13,12 +13,12 @@ function Blog() {
     const handleOpen = () => setOpenModal(true);
     const handleClose = () => setOpenModal(false);
     useEffect(() => {
-        axios.get("https://warm-depths-72297.herokuapp.com/blogs").then(res=>setBlogs(res.data)).catch(err=>console.log(err))
+        axios.get("https://automantia-update-server-site.vercel.app/blogs").then(res=>setBlogs(res.data)).catch(err=>console.log(err))
     }, [])
     
 
     const detailsblog = (id) => {
-        axios.get(`https://warm-depths-72297.herokuapp.com/blogbyid/${id}`).then(res => setBlog(res.data)).catch(err => console.log(err))
+        axios.get(`https://automantia-update-server-site.vercel.app/blogbyid/${id}`).then(res => setBlog(res.data)).catch(err => console.log(err))
         handleOpen()
     }
     return (

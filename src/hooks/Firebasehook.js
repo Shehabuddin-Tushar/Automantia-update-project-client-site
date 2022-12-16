@@ -132,7 +132,7 @@ const saveuser=(email,password)=>{
       password:password,
       role:"viewer"
    }
-   fetch("http://localhost:5000/saveuser",{
+   fetch("https://automantia-update-server-site.vercel.app/saveuser",{
       method:"POST",
       headers:{
          "content-type":"application/json"

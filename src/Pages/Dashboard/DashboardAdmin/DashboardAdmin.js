@@ -14,7 +14,7 @@ function DashboardAdmin() {
         const confirmchange = window.confirm("Are you sure you want Make admin this email");
         if (confirmchange) {
 
-            axios.put(`https://warm-depths-72297.herokuapp.com/makeadmin/${data.email}`).then(res => {
+            axios.put(`https://automantia-update-server-site.vercel.app/makeadmin/${data.email}`).then(res => {
                 if (res.data === false) {
                     toast.error("This email is not valid")
                 } else {

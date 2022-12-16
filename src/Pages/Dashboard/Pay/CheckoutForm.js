@@ -19,7 +19,7 @@ function CheckoutForm(props) {
 
   useEffect(() => {
 
-    fetch("https://warm-depths-72297.herokuapp.com/create-payment-intent", {
+    fetch("https://automantia-update-server-site.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -91,7 +91,7 @@ function CheckoutForm(props) {
 
       }
       console.log(payment);
-      const url = `https://warm-depths-72297.herokuapp.com/orders/${id}`;
+      const url = `https://automantia-update-server-site.vercel.app/orders/${id}`;
       console.log(url)
       fetch(url, {
         method: "PUT",

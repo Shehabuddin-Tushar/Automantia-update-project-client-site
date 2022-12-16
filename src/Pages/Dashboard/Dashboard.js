@@ -55,7 +55,7 @@ function Dashboard(props) {
   const [databaseuser, setDatabaseuser] = useState({});
   const useremail = user.email;
   useEffect(() => {
-    fetch(`https://warm-depths-72297.herokuapp.com/userfind/${user.email}`).then(res => res.json()).then(data => {
+    fetch(`https://automantia-update-server-site.vercel.app/userfind/${user.email}`).then(res => res.json()).then(data => {
       setDatabaseuser(data);
       setMyrole(data.role === "admin" ? true : false)
 

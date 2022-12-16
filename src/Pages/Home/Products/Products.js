@@ -9,7 +9,7 @@ function Products({ item }) {
 
     useEffect(() => {
 
-        fetch("https://warm-depths-72297.herokuapp.com/products").then(res => res.json()).then(data => setProducts(data))
+        fetch("https://automantia-update-server-site.vercel.app/products").then(res => res.json()).then(data => setProducts(data))
 
     }, [products])
     return (
