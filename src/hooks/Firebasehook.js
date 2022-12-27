@@ -1,179 +1,181 @@
-import React,{useState,useEffect} from 'react'
-import { getAuth, signInWithPopup,GoogleAuthProvider,onAuthStateChanged,signOut,
-   createUserWithEmailAndPassword,updateProfile,signInWithEmailAndPassword} from "firebase/auth";
+import React, { useState, useEffect } from 'react'
+import {
+   getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut,
+   createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword
+} from "firebase/auth";
 import automantiaAuthantication from '../Firebase/firebase.init';
-import {useHistory,Redirect} from 'react-router-dom'
+import { useHistory, Redirect } from 'react-router-dom'
 automantiaAuthantication();
 const auth = getAuth();
 const googleprovider = new GoogleAuthProvider();
 
 const useFirebase = () => {
- 
-    const [user,setUser]=useState({});
-    const [error,setError]=useState("");
-    const [success,setSuccess]=useState("");
-    const [isloading,setIsloading]=useState(true);
-    const history=useHistory();
+
+   const [user, setUser] = useState({});
+   const [error, setError] = useState("");
+   const [success, setSuccess] = useState("");
+   const [isloading, setIsloading] = useState(true);
+   const history = useHistory();
 
    /** google login */
    const signupWithgoogleLogin = () => {
 
       return signInWithPopup(auth, googleprovider)
    }
-   
-/*login start */
 
- const [loginuser,setLoginuser]=useState({
-    email:"",password:""
- });
+   /*login start */
 
- const handleloginchange=(e)=>{
-    
-   const newloginuser={...loginuser}
-   newloginuser[e.target.name]=e.target.value
-   setLoginuser(newloginuser);
-   console.log(loginuser);
- }
+   const [loginuser, setLoginuser] = useState({
+      email: "", password: ""
+   });
 
- const singinLogin=()=>{
-  return signInWithEmailAndPassword(auth, loginuser.email, loginuser.password)
-  }
-/*login end */
+   const handleloginchange = (e) => {
 
-
-
-/* register start */
-const [uservalues,setUservalues]=useState({
-    displayname:"",email:"",password:"",confirmpassword:""
- });
-
-
-
- const handlechangeuservalues=(e)=>{
-    const newuser={...uservalues} 
-    newuser[e.target.name]=e.target.value
-    setUservalues(newuser);
-    console.log(e.target.value)
- }
-
-const createUser=(e)=>{
-
-   e.preventDefault();
-   
-    if(uservalues.displayname===""){
-        setSuccess('')
-        setError("your field is empty");
-       
-        return  
-     }
-    if(uservalues.email===""){
-       setSuccess('')
-       setError("your field is empty");
-      
-       return  
-    }
-    if(uservalues.password.length<6){
-        setSuccess('')
-        setError("your password is less then 6 characters");
-      
-        return
-      }
-    if(uservalues.password!==uservalues.confirmpassword){
-        setSuccess('')
-        setError("your password and confirm password does not matched");
-       
-        return  
-     }
-    
-  setIsloading(true) 
-  createUserWithEmailAndPassword(auth,uservalues.email,uservalues.password)
-  .then((result) => {
-     saveuser(uservalues.email,uservalues.password)
-     setusername()
-     setError('');
-     setUservalues({})
-     setSuccess('User created successfully');
-     Logout();
-
-     setTimeout(()=>{
-         setSuccess("");
-        
-     },3000)
-  })
-  .catch((error) => {
-      setSuccess('')
-     
-      setError(error.message);
-  }).finally(()=>{
-      setUservalues({})
-      setUser({})
-      setIsloading(false);
-     
-    });
-}
-const setusername=()=>{
-  
-  updateProfile(auth.currentUser, {
-    displayName:uservalues.displayname
-  }).then(() => {
-    
-  }).catch((error) => {
-    
-  });
- }
-
-/* register end */
-
-/**user save in database */
-
-const saveuser=(email,password)=>{
-   const userdata={
-      email:email,
-      password:password,
-      role:"viewer"
+      const newloginuser = { ...loginuser }
+      newloginuser[e.target.name] = e.target.value
+      setLoginuser(newloginuser);
+      console.log(loginuser);
    }
-   fetch("https://automantia-update-server-site.vercel.app/saveuser",{
-      method:"POST",
-      headers:{
-         "content-type":"application/json"
-      },
-      body:JSON.stringify(userdata)
-   }).then(res=>res.json()).then(data=>console.log(data))
-}
-/**user save in database end */
 
-const Logout=()=>{
-       
-    signOut(auth).then(() => {
-       setUser({});
-       setUservalues({})
-       console.log(user)
-     }).catch((error) => {
-       console.log(error.message)
-     })
-}
+   const singinLogin = () => {
+      return signInWithEmailAndPassword(auth, loginuser.email, loginuser.password)
+   }
+   /*login end */
 
-useEffect(()=>{
-    setIsloading(true)
-    const unsubscribed=onAuthStateChanged(auth, (user) => {
-      if (user) {
-        
-         setUser(user) 
-      }else{
-         setUser({})
+
+
+   /* register start */
+   const [uservalues, setUservalues] = useState({
+      displayname: "", email: "", password: "", confirmpassword: ""
+   });
+
+
+
+   const handlechangeuservalues = (e) => {
+      const newuser = { ...uservalues }
+      newuser[e.target.name] = e.target.value
+      setUservalues(newuser);
+      console.log(e.target.value)
+   }
+
+   const createUser = (e) => {
+
+      e.preventDefault();
+
+      if (uservalues.displayname === "") {
+         setSuccess('')
+         setError("your field is empty");
+
+         return
+      }
+      if (uservalues.email === "") {
+         setSuccess('')
+         setError("your field is empty");
+
+         return
+      }
+      if (uservalues.password.length < 6) {
+         setSuccess('')
+         setError("your password is less then 6 characters");
+
+         return
+      }
+      if (uservalues.password !== uservalues.confirmpassword) {
+         setSuccess('')
+         setError("your password and confirm password does not matched");
+
+         return
       }
 
-      setIsloading(false)
-    });
-    return unsubscribed;
+      setIsloading(true)
+      createUserWithEmailAndPassword(auth, uservalues.email, uservalues.password)
+         .then((result) => {
+            saveuser(uservalues.email, uservalues.password)
+            setusername()
+            setError('');
+            setUservalues({})
+            setSuccess('User created successfully');
+            Logout();
+
+            setTimeout(() => {
+               setSuccess("");
+
+            }, 3000)
+         })
+         .catch((error) => {
+            setSuccess('')
+
+            setError(error.message);
+         }).finally(() => {
+            setUservalues({})
+            setUser({})
+            setIsloading(false);
+
+         });
    }
-  ,[]);
+   const setusername = () => {
+
+      updateProfile(auth.currentUser, {
+         displayName: uservalues.displayname
+      }).then(() => {
+
+      }).catch((error) => {
+
+      });
+   }
+
+   /* register end */
+
+   /**user save in database */
+
+   const saveuser = (email, password) => {
+      const userdata = {
+         email: email,
+         password: password,
+         role: "viewer"
+      }
+      fetch("https://automantia-serverside.onrender.com/saveuser", {
+         method: "POST",
+         headers: {
+            "content-type": "application/json"
+         },
+         body: JSON.stringify(userdata)
+      }).then(res => res.json()).then(data => console.log(data))
+   }
+   /**user save in database end */
+
+   const Logout = () => {
+
+      signOut(auth).then(() => {
+         setUser({});
+         setUservalues({})
+         console.log(user)
+      }).catch((error) => {
+         console.log(error.message)
+      })
+   }
+
+   useEffect(() => {
+      setIsloading(true)
+      const unsubscribed = onAuthStateChanged(auth, (user) => {
+         if (user) {
+
+            setUser(user)
+         } else {
+            setUser({})
+         }
+
+         setIsloading(false)
+      });
+      return unsubscribed;
+   }
+      , []);
 
 
-  
+
    return {
-    isloading,setIsloading,loginuser,singinLogin,user,setUservalues,
+      isloading, setIsloading, loginuser, singinLogin, user, setUservalues,
       Logout, handlechangeuservalues, createUser, error, setError, success, handleloginchange, signupWithgoogleLogin
-}
+   }
 }
 export default useFirebase;

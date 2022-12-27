@@ -41,7 +41,7 @@ function Addproduct() {
             image: imageURL,
         };
 
-        axios.post(`https://automantia-update-server-site.vercel.app/addproduct`, productData)
+        axios.post(`https://automantia-serverside.onrender.com/addproduct`, productData)
             .then(res => {
                 console.log(res)
                 if (res.data.insertedId) {

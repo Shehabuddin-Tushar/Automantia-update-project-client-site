@@ -9,7 +9,7 @@ function Products({ item }) {
 
     useEffect(() => {
 
-        fetch("https://automantia-update-server-site.vercel.app/products").then(res => res.json()).then(data => setProducts(data))
+        fetch("https://automantia-serverside.onrender.com/products").then(res => res.json()).then(data => setProducts(data))
 
     }, [products])
     return (
@@ -29,7 +29,7 @@ function Products({ item }) {
                                     <Singleproduct key={product.name} product={product} />
                                 )
                             })
-                    } 
+                    }
 
                 </Grid>
             </Container>

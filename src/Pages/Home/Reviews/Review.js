@@ -38,7 +38,7 @@ function Review() {
 
     useEffect(() => {
 
-        fetch("https://automantia-update-server-site.vercel.app/reviews").then(res => res.json()).then(data => setAllreviews(data))
+        fetch("https://automantia-serverside.onrender.com/reviews").then(res => res.json()).then(data => setAllreviews(data))
 
     }, [])
 
@@ -82,7 +82,7 @@ function Review() {
     };
 
     const reviewdetails = (id) => {
-        axios.get(`https://automantia-update-server-site.vercel.app/reviewbyid/${id}`).then(res => setReview(res.data)).catch(err => console.log(err))
+        axios.get(`https://automantia-serverside.onrender.com/reviewbyid/${id}`).then(res => setReview(res.data)).catch(err => console.log(err))
         handleOpen()
     }
     return (

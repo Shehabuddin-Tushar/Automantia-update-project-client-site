@@ -41,7 +41,7 @@ function Manageallorders() {
 
   useEffect(() => {
 
-    axios.get(`https://automantia-update-server-site.vercel.app/allorders`).then(res => setAllordersdata(res.data)).catch(err => console.log(err))
+    axios.get(`https://automantia-serverside.onrender.com/allorders`).then(res => setAllordersdata(res.data)).catch(err => console.log(err))
 
   }, [allordersdata])
 
@@ -51,7 +51,7 @@ function Manageallorders() {
     const confirmchange = window.confirm("Are you sure you want to change status?");
     if (confirmchange) {
 
-      axios.put(`https://automantia-update-server-site.vercel.app/changestatus/${id}`).then(res => {
+      axios.put(`https://automantia-serverside.onrender.com/changestatus/${id}`).then(res => {
 
         toast.success(res.data)
       }).catch(err => console.log(err))

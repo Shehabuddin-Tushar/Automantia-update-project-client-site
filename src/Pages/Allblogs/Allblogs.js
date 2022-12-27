@@ -14,11 +14,11 @@ function Allblogs() {
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
   useEffect(() => {
-    axios.get("https://automantia-update-server-site.vercel.app/blogs").then(res => setBlogs(res.data)).catch(err => console.log(err))
+    axios.get("https://automantia-serverside.onrender.com/blogs").then(res => setBlogs(res.data)).catch(err => console.log(err))
   }, [])
 
   const detailsblog = (id) => {
-    axios.get(`https://automantia-update-server-site.vercel.app/blogbyid/${id}`).then(res => setBlog(res.data)).catch(err => console.log(err))
+    axios.get(`https://automantia-serverside.onrender.com/blogbyid/${id}`).then(res => setBlog(res.data)).catch(err => console.log(err))
     handleOpen()
   }
   return (
@@ -31,7 +31,7 @@ function Allblogs() {
           backgroundSize: "100% 100%",
           height: "300px",
           objectFit: "cover",
-          marginBottom:"30px"
+          marginBottom: "30px"
         }}>
           <div className="aboutoverlay" style={{
             backgroundColor: "rgba(207,216,220,0.5)",
@@ -77,7 +77,7 @@ function Allblogs() {
           </div>
         </Box>
         <Container sx={{ marginBottom: "20px" }}>
-          
+
           <Grid container spacing={2}>
 
             {blogs.map((el) => {
@@ -116,7 +116,7 @@ function Allblogs() {
         </Container>
         <BlogModal openModal={openModal} handleClose={handleClose} blogdetails={blog} />
       </Box>
-      <Footer/>
+      <Footer />
     </>
   )
 }

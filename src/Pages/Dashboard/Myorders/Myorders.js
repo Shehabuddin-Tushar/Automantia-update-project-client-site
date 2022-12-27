@@ -43,7 +43,7 @@ function Myorders() {
 
   useEffect(() => {
 
-    axios.get(`https://automantia-update-server-site.vercel.app/myorders?email=${user.email}`)
+    axios.get(`https://automantia-serverside.onrender.com/myorders?email=${user.email}`)
       .then(res => {
         setMyordersdata(res.data);
 
@@ -56,7 +56,7 @@ function Myorders() {
     const confirmdelete = window.confirm("Are you sure you want to delete this data?");
     if (confirmdelete) {
 
-      axios.delete(`https://automantia-update-server-site.vercel.app/deleteorder/${id}`).then(res => {
+      axios.delete(`https://automantia-serverside.onrender.com/deleteorder/${id}`).then(res => {
         console.log(res)
         toast.success(res.data)
         const filterdata = myordersdata.filter(product => product._id !== id);

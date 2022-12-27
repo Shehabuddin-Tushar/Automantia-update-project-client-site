@@ -18,7 +18,7 @@ function Addreview() {
     setReviewnumber(event.target.value);
   };
   const onSubmit = data => {
-    axios.post(`https://automantia-update-server-site.vercel.app/savereview`, data)
+    axios.post(`https://automantia-serverside.onrender.com/savereview`, data)
       .then(res => {
         toast.success("your review add successfully")
 
